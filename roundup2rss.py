@@ -20,7 +20,6 @@ datere = re.compile("<h3>(2\d\d\d-\w+-\d+)</h3>")
 titlere = re.compile("<h1>([^<]+)</h1>")
 endre = re.compile("</div>")
 
-
 ########## RSS support ##########
 
 def fetch(url):
@@ -43,10 +42,11 @@ def writeheader(title):
     print '   <language>en-AU</language>'
 
 def writeentry(e):
+    text = e['text'].replace("/news/go.cfm", "http://whirlpool.net.au/news/go.cfm")
     print "   <item>"
     print "     <title><![CDATA[ %s: %s ]]></title>" % (e['date'], e['title'])
     print "     <guid>%s</guid>" % e['date']
-    print "     <description><![CDATA[%s]]></description>" % e['text']
+    print "     <description><![CDATA[%s]]></description>" % text
     print "   </item>"
 
 def writefooter():
